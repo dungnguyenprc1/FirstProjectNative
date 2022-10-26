@@ -5624,6 +5624,13 @@
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz"
   "version" "0.70.3"
 
+"react-native-modal-datetime-picker@^14.0.0":
+  "integrity" "sha512-orI0BMgX9uooSZWYIILmMaZXqi8Ebr0vqsLUFL03zORpv9NvkBlLMQ8dZVdDxWUc1Lbx/N5DJskC16AOypPy8Q=="
+  "resolved" "https://registry.npmjs.org/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-14.0.0.tgz"
+  "version" "14.0.0"
+  dependencies:
+    "prop-types" "^15.7.2"
+
 "react-native-styled-components@^2.1.0":
   "integrity" "sha512-+BHBlDYeAsnrRajwmCkCpLlF18gK9RtA5cJxD32ilBTGBqpQAR5SPyibURPV+t5vSOEzFZsDGbVmNTSeYWx3Eg=="
   "resolved" "https://registry.npmjs.org/react-native-styled-components/-/react-native-styled-components-2.1.0.tgz"

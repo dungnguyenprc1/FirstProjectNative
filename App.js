@@ -6,7 +6,7 @@ import InforCustomerScreen from './src/screens/InforCustomerScreen';
 const YourApp = () => {
   return (
     <ScrollView>
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView>
         <InforCustomerScreen />
       </SafeAreaView>
     </ScrollView>

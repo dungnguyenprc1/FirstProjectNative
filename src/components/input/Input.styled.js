@@ -1,12 +1,11 @@
 import styled from 'styled-components/native';
-// import { Controller } from 'react-hook-form';
 
 const NormalInput = styled.View`
   border-radius: 4px;
   border-width: 1px;
   height: 40px;
   padding: 0 10px;
-  border-color: #e5e5e5;
+  border-color: ${props => (props.error ? '#f44336' : '#e5e5e5')};
   background-color: #fff;
   flex-direction: row;
   align-items: center;
@@ -18,18 +17,7 @@ const Layout = styled.View`
 `;
 const TextError = styled.Text`
   color: red;
-  margin: 2px 0;
-`;
-const WrongInput = styled.View`
-  border-radius: 4px;
-  border-width: 1px;
-  height: 40px;
-  padding: 0 10px;
-  border-color: #f44336;
-  background-color: #fff;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin-top: 8px;
 `;
 
-export {NormalInput, Layout, TextError, WrongInput};
+export {NormalInput, Layout, TextError};

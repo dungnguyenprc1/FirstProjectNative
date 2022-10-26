@@ -13,7 +13,6 @@ export default function SelectInput({name, control}) {
       render={() => {
         return (
           <View>
-            {/* <CheckBox title="abe" center checkedIcon="dot-circle-o" /> */}
             <Text>ABC</Text>
           </View>
         );
