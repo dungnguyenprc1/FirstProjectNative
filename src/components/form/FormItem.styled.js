@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 const Layout = styled.View`
   flex: 1;
+  z-index: -10;
 
   background-color: '#FFF';
   margin-bottom: 13px;

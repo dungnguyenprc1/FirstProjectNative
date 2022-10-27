@@ -1,8 +1,8 @@
 import React from 'react';
-import {SafeAreaView, View, Text, TextInput} from 'react-native';
+import {Text} from 'react-native';
 import {Layout, Row} from './FormItem.styled';
 
-export default function FormItem({children, label, require = false}) {
+export default function FormItem({children, style, label, require = false}) {
   return (
     <Layout>
       <Row>

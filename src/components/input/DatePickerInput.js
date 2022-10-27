@@ -1,21 +1,24 @@
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  TextInput,
-  Button,
-} from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import React, {useState} from 'react';
-import moment from 'moment';
 import {Controller} from 'react-hook-form';
-import {NormalInput} from './Input.styled';
-import {showDate} from '../../helper';
+import {Text, TouchableOpacity, View} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {getYears, showDate} from '../../helper';
+import {NormalInput, TextError} from './Input.styled';
 
-export default function DatePickerInput({control, name, onPress}) {
+export default function DatePickerInput({
+  control,
+  setError,
+  getValues,
+  name,
+  rules = {},
+  setValue,
+  register,
+  children,
+}) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [datePickup, setDatePickup] = useState(false);
+  const [datePickup, setDatePickup] = useState('');
+
+  const [agesValidate, setAgesValidate] = useState();
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -26,41 +29,46 @@ export default function DatePickerInput({control, name, onPress}) {
   };
 
   const handleConfirm = date => {
-    console.warn('A date has been picked: ', datePickup);
     setDatePickup(showDate(date));
+    // handleError();
+    setValue(name, getYears(showDate(date)), {shouldTouch: true});
+    setAgesValidate(getValues(name));
+
+    console.log('datePickup', datePickup);
 
     hideDatePicker();
   };
-
   return (
-    <NormalInput>
-      <TouchableOpacity onPress={() => showDatePicker()}>
-        <Controller
-          control={control}
-          name={name}
-          // rules={rules}
-          render={({field: value, onChange, onBlur}) => {
-            return (
-              <View>
-                <Text
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  // editable="false"
-                >
-                  {datePickup || 'DD/MM/YYYY'}
-                </Text>
+    <Controller
+      control={control}
+      name={name}
+      rules={rules}
+      render={({fieldState: {error}}) => {
+        return (
+          <View>
+            <TouchableOpacity onPress={() => showDatePicker()}>
+              <NormalInput>
+                <Text>{datePickup || 'DD/MM/YYYY'}</Text>
+                {children}
+                {console.log('dateofbir', error)}
+                {console.log('getValues(name', agesValidate)}
+
                 <DateTimePickerModal
                   isVisible={isDatePickerVisible}
                   mode="date"
                   onConfirm={handleConfirm}
                   onCancel={hideDatePicker}
                 />
-              </View>
-            );
-          }}
-        />
-      </TouchableOpacity>
-    </NormalInput>
+              </NormalInput>
+            </TouchableOpacity>
+            {error ? (
+              <TextError>
+                {error.message || 'Please Pick Your Birthday'}
+              </TextError>
+            ) : null}
+          </View>
+        );
+      }}
+    />
   );
 }
