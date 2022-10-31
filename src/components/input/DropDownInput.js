@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Controller} from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function DropDownInput({data = [], control, name, setValue}) {
   const [open, setOpen] = useState(false);
   const [valueDropDown, setValueDropDown] = useState('coder');
-  const [items, setItems] = useState(data);
-  // setValue(name, valueDropDown);
 
   useEffect(() => {
     setValue(name, valueDropDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueDropDown]);
   return (
     <Controller
@@ -20,17 +19,13 @@ export default function DropDownInput({data = [], control, name, setValue}) {
         return (
           <TouchableOpacity>
             <DropDownPicker
-              // onDirectionChanged={() => setValue(name, valueDropDown)}
-              // onChangeValue={setValue(name, valueDropDown)}
-              // onOpen={() => setValue(name, valueDropDown)}
-              onSelectItem={() => setValue(name, valueDropDown)}
-              // onClose={() => setValue(name, valueDropDown)}
+              style={styles.dropdown}
               open={open}
               value={valueDropDown}
-              items={items}
+              items={data}
               setOpen={setOpen}
               setValue={setValueDropDown}
-              setItems={setItems}
+              dropDownContainerStyle={styles.dropDownContainerStyle}
             />
           </TouchableOpacity>
         );
@@ -38,3 +33,14 @@ export default function DropDownInput({data = [], control, name, setValue}) {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  dropdown: {
+    minHeight: 40,
+    borderRadius: 4,
+    borderColor: '#A5ABB3',
+  },
+  dropDownContainerStyle: {
+    borderColor: '#A5ABB3',
+  },
+});

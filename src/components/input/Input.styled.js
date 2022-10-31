@@ -6,7 +6,7 @@ const NormalInput = styled.View`
   height: 40px;
   padding: 0 10px;
   border-color: ${props =>
-    props.error ? props.theme.colors.error : '#e5e5e5'};
+    props.error ? props.theme.colors.error : props.theme.colors.borderInput};
   background-color: #fff;
   flex-direction: row;
   align-items: center;

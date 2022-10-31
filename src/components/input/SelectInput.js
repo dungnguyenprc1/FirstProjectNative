@@ -9,7 +9,6 @@ export default function SelectInput({
   data = [],
   getValues,
   setValue,
-  defaultValue,
 }) {
   const handleSelect = value => {
     setValue(name, value, {shouldTouch: true});
@@ -26,7 +25,7 @@ export default function SelectInput({
                 <CustomRadioButton
                   item={item}
                   key={i}
-                  value={getValues(name) ? getValues(name) : defaultValue}
+                  value={getValues(name) ? getValues(name) : 'men'}
                   onPress={() => handleSelect(item.value)}
                 />
               );

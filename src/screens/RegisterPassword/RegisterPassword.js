@@ -1,114 +1,134 @@
-import {View, Text, SafeAreaView, TextInput} from 'react-native';
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
+import {Controller, useWatch} from 'react-hook-form';
+import {View} from 'react-native';
 
 import {CustomInput} from '../../components/input';
-import {useForm} from 'react-hook-form';
+
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 import FormItem from '../../components/form/FormItem';
+import {
+  Container,
+  CoverInput,
+  Input,
+  MediumPassword,
+  Section,
+  StrongPassword,
+  SubmitText,
+  Touch,
+  WeekPassword,
+} from './RegisterPassword.styled';
 
-export default function RegisterPassword() {
-  const [password, setPassword] = useState('');
-  const [focus, setFocus] = useState(false);
+import {TextError} from '../../components/input/Input.styled';
+import {regexPassword, usernameRegex} from '../../helper';
 
-  const refInput = useRef();
+export default function RegisterPassword({route}) {
+  const [showPassword, setShowPassword] = useState(true);
 
-  const {control} = useForm();
+  const {control, handleSubmit} = route.params;
 
-  const atLeast6character = /.{6,}/g;
-  const atLeastOneNumeric = /[0-9]/g;
-  const atLeastOneLowercase = /[a-z]/g;
-  const atLeastOneUppercase = /[A-Z]/g;
-  const atLeastOneSpecialChar = /[!@#$%^&*()-+]/g;
-  const passwordRegex =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()-+]).{6,}$/g;
+  const password = useWatch({control, name: 'password'});
+
+  function check(value) {
+    if (!value) {
+      return;
+    }
+    if (value) {
+      switch (true) {
+        case value <= 2:
+          return <WeekPassword>{(value = 'Week password')}</WeekPassword>;
+
+        case value > 2 && value < 5:
+          return <MediumPassword>{(value = 'Medium password')}</MediumPassword>;
+
+        case value >= 5:
+          return <StrongPassword>{(value = 'Strong password')}</StrongPassword>;
+      }
+    }
+  }
 
   const passwordTracker = {
-    uppercase: password.match(atLeastOneUppercase),
-    lowercase: password.match(atLeastOneLowercase),
-    number: password.match(atLeastOneNumeric),
-    specialChar: password.match(atLeastOneSpecialChar),
-    sixCharsOrGreater: password.match(atLeast6character),
+    uppercase: password?.match(regexPassword.atLeastOneUppercase),
+    lowercase: password?.match(regexPassword.atLeastOneLowercase),
+    number: password?.match(regexPassword.atLeastOneNumeric),
+    specialChar: password?.match(regexPassword.atLeastOneSpecialChar),
+    sixCharsOrGreater: password?.match(regexPassword.atLeast6character),
   };
 
   const passwordStrength = Object.values(passwordTracker).filter(
     value => value,
   ).length;
 
+  const onSubmit1 = data => {
+    console.log('data', data);
+  };
+
   return (
-    <SafeAreaView style={{backgroundColor: 'red', flex: 1}}>
-      <View
-        style={{
-          backgroundColor: 'yellow',
-          flex: 1,
-          justifyContent: 'flex-start',
-        }}>
+    <Container>
+      <Section>
         <FormItem label="Username" require>
           <CustomInput
             rules={{
-              required: 'Fill Your Name,Please',
+              required: 'Fill Your Username,Please',
+              pattern: {value: usernameRegex, message: 'Invalid Username'},
             }}
+            value
             control={control}
             name="username"
             placeholder="Please Fill Your Name"
           />
         </FormItem>
         <FormItem label="Password" require>
-          <TextInput
-            ref={refInput}
-            placeholder="test"
-            value={password}
-            onChangeText={setPassword}
-            onFocus={() => {
-              const isF = refInput.current.isFocused();
-              console.log('isFocus', isF);
-              setFocus(true);
-            }}
-          />
-          <View>
-            {focus && (
-              <Text>
-                {passwordStrength <= 2 || !passwordTracker.sixCharsOrGreater
-                  ? 'Week Password'
-                  : passwordStrength === 3
-                  ? 'Week Password '
-                  : passwordStrength === 4
-                  ? 'Medium Password'
-                  : 'Strong Password'}
-              </Text>
-            )}
-          </View>
-
-          {/* <CustomInput
-            passwordTracker={passwordTracker}
-            passwordStrength={passwordStrength}
-            rules={{
-              required: 'Fill Your Password,Please',
-            }}
+          <Controller
             control={control}
             name="password"
-            placeholder="Please Fill Your Password"
-            onFocus={() => setFocus(true)}
-          /> */}
+            rules={{
+              required: 'Fill your password, Please',
+              pattern: {
+                value: regexPassword.atLeast6character,
+                message: 'At Least 6 Characters',
+              },
+            }}
+            render={({
+              field: {value, onChange, onBlur, ref},
+              fieldState: {error},
+            }) => {
+              return (
+                <View>
+                  <CoverInput>
+                    <Input
+                      secureTextEntry={showPassword}
+                      ref={ref}
+                      placeholder="Password"
+                      value={value}
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                    />
+                    <Touch onPress={() => setShowPassword(!showPassword)}>
+                      {showPassword ? (
+                        <AntDesign name="eye" size={20} />
+                      ) : (
+                        <Entypo name="eye-with-line" size={20} />
+                      )}
+                    </Touch>
+                  </CoverInput>
+                  <View>
+                    {error ? (
+                      <TextError>{error.message || 'ERROR'}</TextError>
+                    ) : (
+                      check(passwordStrength)
+                    )}
+                  </View>
+                </View>
+              );
+            }}
+          />
         </FormItem>
-        {/* <TextInput
-          ref={refInput}
-          placeholder="test"
-          value={password}
-          onChangeText={setPassword}
-          onFocus={() => {
-            const isF = refInput.current.isFocused();
-            console.log('isFocus', isF);
-            setFocus(true);
-          }}
-        /> */}
-        {console.log(
-          'passwordTracker.lowercase',
-          !passwordTracker.sixCharsOrGreater,
-          passwordStrength,
-        )}
-      </View>
-      <View style={{flex: 1, backgroundColor: 'blue'}}>
-        <Text>a</Text>
-      </View>
-    </SafeAreaView>
+
+        <Touch onPress={handleSubmit(onSubmit1)}>
+          <SubmitText>Submit</SubmitText>
+        </Touch>
+      </Section>
+    </Container>
   );
 }

@@ -1,15 +1,20 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {SafeAreaView, View} from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FormItem from '../../components/form/FormItem';
 import CustomInput from '../../components/input/CustomInput';
-
-import DropDownPicker from 'react-native-dropdown-picker';
 import DatePickerInput from '../../components/input/DatePickerInput';
 
 import DropDownInput from '../../components/input/DropDownInput';
 import SelectInput from '../../components/input/SelectInput';
+import {
+  fullnameRegex,
+  idRegex,
+  phoneRegex,
+  emailRegex,
+} from '../../helper/index';
 import {
   Center,
   Container,
@@ -27,7 +32,7 @@ const GENTLE_VALUE = {
 };
 
 export default function InforCustomerScreen({navigation}) {
-  const [items, setItems] = useState([
+  const [items] = useState([
     {label: 'Thợ Code', value: 'coder'},
     {label: 'Bác Sĩ', value: 'doctor'},
     {label: 'Ca Sĩ', value: 'single'},
@@ -38,38 +43,28 @@ export default function InforCustomerScreen({navigation}) {
     {title: 'Khác', value: GENTLE_VALUE.others},
   ];
   const {
-    register,
     control,
     setFocus,
     handleSubmit,
     getValues,
     setValue,
-    setError,
+
     formState: {errors, isValid},
   } = useForm({
+    mode: 'onChange',
     defaultValues: {
+      password: '',
       gentle: GENTLE_VALUE.men,
     },
   });
-  const ageRegex = /^[0-9]{13, 65}$/;
-
-  const checkMinMaxAge = value => {
-    console.log('value', value);
-    return value > 13 && value < 65;
-  };
-  const fullnameRegex =
-    /^[^-\s\d][a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]{12,255}$/;
-  console.log(errors);
-
   const onSubmit = data => {
     console.log('data', data);
-    navigation.navigate('Password');
+    navigation.navigate('Password', {
+      control,
+      handleSubmit,
+    });
   };
-  const idRegex = /^[\w-_.]{9,15}$/;
-  const phoneRegex =
-    /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-  const emailRegex =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   return (
     <ContainerScroll>
       <SafeAreaView>
@@ -90,19 +85,21 @@ export default function InforCustomerScreen({navigation}) {
             </FormItem>
             <FormItem label="Ngày Sinh" require>
               <DatePickerInput
-                setError={setError}
                 control={control}
                 name="dob"
                 setValue={setValue}
                 getValues={getValues}
                 rules={{
                   required: 'Your Birthday, Please',
-                  pattern: {
-                    value: () => checkMinMaxAge(getValues('dob')),
-                    message: ' Invalid Age',
+                  max: {
+                    value: 65,
+                    message: 'Your ages too old',
                   },
-                }}
-                register={register}>
+                  min: {
+                    value: 13,
+                    message: 'You are so young',
+                  },
+                }}>
                 <AntDesign name="calendar" size={18} />
               </DatePickerInput>
             </FormItem>
@@ -143,7 +140,6 @@ export default function InforCustomerScreen({navigation}) {
                 name="email"
                 rules={{
                   required: 'Fill Your Email,Please',
-
                   pattern: {value: emailRegex, message: 'Invalid Email'},
                 }}
                 placeholder="Fill Your Email"

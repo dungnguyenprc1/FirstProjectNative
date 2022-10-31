@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Text, View} from 'react-native';
 // import InforCustomerScreen from './src/screens/InforCustomerScreen/InforCustomerScreen';
@@ -11,6 +11,7 @@ const theme = {
     cam: '#f4a31e',
     error: '#f44336',
     gray: '#e5e5e5',
+    borderInput: '#A5ABB3',
   },
 };
 

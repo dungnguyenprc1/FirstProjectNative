@@ -1,9 +1,7 @@
 import styled from 'styled-components/native';
 
 const Layout = styled.View`
-  flex: 1;
-  z-index: -10;
-
+  /* flex: 1; */
   background-color: '#FFF';
   margin-bottom: 13px;
 `;

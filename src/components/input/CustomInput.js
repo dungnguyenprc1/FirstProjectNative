@@ -21,11 +21,15 @@ export default function CustomInput({
         control={control}
         name={name}
         rules={rules}
-        render={({field: {value, onChange, onBlur}, fieldState: {error}}) => {
+        render={({
+          field: {value, onChange, onBlur, ref},
+          fieldState: {error},
+        }) => {
           return (
             <View>
               <NormalInput error={error}>
                 <TextInputFlex
+                  ref={ref}
                   placeholder={placeholder}
                   value={value}
                   onChangeText={onChange}
