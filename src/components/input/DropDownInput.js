@@ -3,9 +3,15 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Controller} from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-export default function DropDownInput({data = [], control, name, setValue}) {
+export default function DropDownInput({
+  data = [],
+  control,
+  name,
+  setValue,
+  getValues,
+}) {
   const [open, setOpen] = useState(false);
-  const [valueDropDown, setValueDropDown] = useState('coder');
+  const [valueDropDown, setValueDropDown] = useState(getValues(name));
 
   useEffect(() => {
     setValue(name, valueDropDown);

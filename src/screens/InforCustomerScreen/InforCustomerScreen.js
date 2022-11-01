@@ -53,6 +53,7 @@ export default function InforCustomerScreen({navigation}) {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
+      job: 'coder',
       password: '',
       gentle: GENTLE_VALUE.men,
     },
@@ -60,8 +61,7 @@ export default function InforCustomerScreen({navigation}) {
   const onSubmit = data => {
     console.log('data', data);
     navigation.navigate('Password', {
-      control,
-      handleSubmit,
+      data,
     });
   };
 
@@ -147,6 +147,7 @@ export default function InforCustomerScreen({navigation}) {
             </FormItem>
             <FormItem label="Nghề Nghiệp">
               <DropDownInput
+                getValues={getValues}
                 control={control}
                 name="job"
                 data={items}

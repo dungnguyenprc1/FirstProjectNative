@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Controller, useWatch} from 'react-hook-form';
+import {Controller, useForm, useWatch} from 'react-hook-form';
 import {View} from 'react-native';
 
 import {CustomInput} from '../../components/input';
@@ -25,8 +25,10 @@ import {regexPassword, usernameRegex} from '../../helper';
 export default function RegisterPassword({route}) {
   const [showPassword, setShowPassword] = useState(true);
 
-  const {control, handleSubmit} = route.params;
+  const {data} = route.params;
 
+  console.log('datatrang1', data);
+  const {control, handleSubmit} = useForm({});
   const password = useWatch({control, name: 'password'});
 
   function check(value) {
@@ -59,8 +61,9 @@ export default function RegisterPassword({route}) {
     value => value,
   ).length;
 
-  const onSubmit1 = data => {
-    console.log('data', data);
+  const onSubmit1 = data1 => {
+    console.log('data1', data1);
+    console.log('datatotal', {...data, ...data1});
   };
 
   return (
