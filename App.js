@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import {Text, View} from 'react-native';
-// import InforCustomerScreen from './src/screens/InforCustomerScreen/InforCustomerScreen';
-import {InforCustomerScreen, RegisterPassword} from './src/screens';
 import {ThemeProvider} from 'styled-components';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import InformationStack from './src/navigation/InformationStack';
+import {FlatListTask} from './src/components/recursion/FlatList/FlatListTask';
+// import {FlatRenderList} from './src/components/recursion/FlatListTask';
+
+import ScrollViewTask from './src/components/recursion/ScrollView/ScrollViewTask';
+import FlatRenderList from './src/components/recursion/FlatList/FlatRenderList';
+// import {ScrollViewTask} from './src/components/recursion/ScrollViewTask';
+// import {FlatListTask} from './src/components/recursion/FlatListTask';
 const theme = {
   colors: {
     cam: '#f4a31e',
@@ -15,16 +21,19 @@ const theme = {
   },
 };
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 const YourApp = () => {
   return (
     // <InforCustomerScreen />
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Information" component={InforCustomerScreen} />
-          <Stack.Screen name="Password" component={RegisterPassword} />
-        </Stack.Navigator>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={InformationStack} />
+          <Tab.Screen name="FlatList" component={FlatListTask} />
+          <Tab.Screen name="ScrollView" component={ScrollViewTask} />
+          <Tab.Screen name="FlatLIST" component={FlatRenderList} />
+        </Tab.Navigator>
       </NavigationContainer>
     </ThemeProvider>
   );

@@ -17,6 +17,7 @@
 		<string>FontAwesome5_Solid.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
+	
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>FirstProject</string>
