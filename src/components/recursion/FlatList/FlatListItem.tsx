@@ -1,40 +1,83 @@
-import React, { FC } from 'react';
-import { FlatList, View, Text,ListRenderItemInfo } from 'react-native';
-import { ItemType } from './type';
+import React, {FC, useState} from 'react';
+import {
+  FlatList,
+  View,
+  Text,
+  ListRenderItemInfo,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+import {ItemType, DATA} from '../type';
 
+const Recursion: FC<ItemType> = ({title, content, child}: ItemType) => {
+    const [show,setShow] = useState(false)
 
-
-const FlatListItem= ({ child, content, id }: ItemType) => {
-    // const render = ({ item }: ListRenderItemInfo<ItemType>) => {
-    //     <View>
-    //     <Text>
-    //         {item.content}
-    //     </Text>
-    //     <FlatListItem
-    //         data={item.child}
-    //         renderItem={render}
-    //         keyExtractor={(item:any) => item.id}
-    //     />
-
-    // </View>
-
-    // }
-
+  const render = ({item}: ListRenderItemInfo<ItemType>) => {
     return (
-        <View>
-            <Text>{content}</Text>
-            <FlatList
-                data={child}
-                renderItem={({ item }: ListRenderItemInfo<ItemType>) => (item.content)}
-                
-                // keyExtractor={item: {id: number} => item.id}
-    />
+      <View
+        style={{
+          left: 15,
+          borderLeftWidth: 1,
+          paddingBottom: 10,
+
+        }}>
+        <View
+          style={{
+            paddingLeft: 15,
+
+            marginBottom: 10,
+            marginTop: 10,
+          }}>
+          <Text>{item.title}</Text>
+          <Text>{item.content}</Text>
         </View>
-    )
-}
+        <View style={{left: 15}}>
+            <TouchableOpacity onPress={() => setShow(false)}>
+          {item.child ? (
+           true && <FlatList
+              data={item.child}
+              renderItem={({item}): any => {
+                return (
+                      <View style={{left: 15, borderLeftWidth: 1, paddingLeft: 15}}>
+                        <Recursion {...item} />
+                      </View>
+                );
+            }}
+            keyExtractor={(item: any) => item.id}
+            />
+            ) : null}
+            </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
 
-// function abc(items)
-//   item 1: item.title 
+  return (
+    <View>
+      <SafeAreaView>
+        <View style={{paddingBottom: 10}}>
+          <Text>{title}</Text>
+          <Text>{content}</Text>
 
-//   item.child && item.child.lenth >0 
-//   abc(item.child)
+         
+            <FlatList
+              data={child}
+              renderItem={render}
+              keyExtractor={(item: any) => item.id}
+            />
+        
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+};
+
+ const FlatListItem: any = () => {
+  return (
+    <View>
+      <Recursion {...DATA} />
+    </View>
+  );
+};
+
+export default FlatListItem
