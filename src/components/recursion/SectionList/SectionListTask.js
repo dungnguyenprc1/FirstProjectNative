@@ -3,29 +3,17 @@ import {View, Text, SafeAreaView, StyleSheet, SectionList} from 'react-native';
 import {ItemType, DATA} from '../type';
 
 function Recursion({child}) {
-  const render = items => {
-    const {item, section} = items;
-    console.log('itemssssss', items);
-
+  const render = ({item, section}) => {
     return (
-      <View style={{paddingLeft: 10}}>
+      <View style={{paddingLeft: 25}}>
+        <Text>{section.title}</Text>
         <Text>{item.comment}</Text>
-        <Text>{`rate ${section.rate}`}</Text>
+        <Text>{`rate ${item.rate}`}</Text>
 
-        {console.log('item.section.child', items)}
-        <SectionList
-          sections={section.child}
-          renderItem={a => {
-            return (
-              <View>
-                <Recursion {...section.child} />
-              </View>
-            );
-            // const {item, section} = items;
-            // console.log('item1111', a);
-            // return <View />;
-          }}
-        />
+        {console.log('item.section.child', section)}
+        {section.child ? (
+          <SectionList sections={section.child} renderItem={render} />
+        ) : null}
       </View>
     );
   };

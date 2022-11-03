@@ -110,11 +110,27 @@ export const DATA = {
                   id: 1,
                   title: 'Nested Item 2.2.2.1',
                   content: 'Giai thich y nghia title',
+                  data: [
+                    {
+                      id: 1,
+                      name: 'Nguyen Van A',
+                      comment: 'Good Services',
+                      rate: 7,
+                    },
+                  ],
                 },
                 {
                   id: 2,
                   title: 'Nested Item 2.2.2.2',
                   content: 'Giai thich y nghia title',
+                  data: [
+                    {
+                      id: 1,
+                      name: 'Nguyen Van A',
+                      comment: 'Good Services',
+                      rate: 7,
+                    },
+                  ],
                 },
               ],
             },
@@ -194,7 +210,7 @@ export const DATA = {
                   data: [{ id: 1, name: 'Nguyen Van A', comment: 'Bad Services', rate: 3 }],
 
                   child: [
-                    { id: 1, title: 'Nested Item 1.1.1.1' },
+                    { id: 1, title: 'Nested Item 1.1.1.1',data: [{ id: 1, name: 'Nguyen Van A', comment: 'Bad Services', rate: 3 }], },
                     {
                       id: 2,
                       title: 'Nested Item 2.1.1.1',
