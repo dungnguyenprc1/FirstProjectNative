@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import InformationStack from './src/navigation/InformationStack';
 import {
+  Card,
   FlatListItem,
   ScrollViewTask,
   SectionListTask,
@@ -30,6 +31,7 @@ const YourApp = () => {
           <Tab.Screen name="FlatList" component={FlatListItem} />
           <Tab.Screen name="ScrollView" component={ScrollViewTask} />
           <Tab.Screen name="SectionList" component={SectionListTask} />
+          <Tab.Screen name="123" component={Card} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeProvider>

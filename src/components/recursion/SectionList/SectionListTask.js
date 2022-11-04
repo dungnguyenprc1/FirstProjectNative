@@ -5,7 +5,13 @@ import {ItemType, DATA} from '../type';
 function Recursion({child}) {
   const render = ({item, section}) => {
     return (
-      <View style={{paddingLeft: 25}}>
+      <View
+        style={{
+          left: 25,
+          borderLeftWidth: 1,
+          paddingLeft: 15,
+          paddingBottom: 15,
+        }}>
         <Text>{section.title}</Text>
         <Text>{item.comment}</Text>
         <Text>{`rate ${item.rate}`}</Text>

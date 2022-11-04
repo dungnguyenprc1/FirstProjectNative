@@ -8,22 +8,18 @@ const Recursion = ({title, child, content}) => {
       <View>
         <Text style={{left: 15}}>{item?.title}</Text>
         {item.child ? (
-          <View>
-            <Recursion {...item} />
-          </View>
-        ) : // <FlatList
-        //   data={item.child}
-        //   keyExtractor={item => item.id}
-        //   renderItem={({item}) => {
-        //     return (
-        //       <View style={{left: 15}}>
-        //         <Recursion {...item} />
-        //       </View>
-        //     );
-        //   }}
-        // />
-        // )
-        null}
+          <FlatList
+            data={item.child}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => {
+              return (
+                <View style={{left: 15}}>
+                  <Recursion {...item} />
+                </View>
+              );
+            }}
+          />
+        ) : null}
       </View>
     );
   };
