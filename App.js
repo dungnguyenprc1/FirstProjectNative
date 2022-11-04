@@ -9,6 +9,7 @@ import {
   ScrollViewTask,
   SectionListTask,
 } from './src/components/recursion';
+import {FlatRenderList} from './src/components/recursion/FlatList/FlatRenderList';
 
 const theme = {
   colors: {
@@ -31,7 +32,7 @@ const YourApp = () => {
           <Tab.Screen name="FlatList" component={FlatListItem} />
           <Tab.Screen name="ScrollView" component={ScrollViewTask} />
           <Tab.Screen name="SectionList" component={SectionListTask} />
-          <Tab.Screen name="123" component={Card} />
+          <Tab.Screen name="123" component={FlatRenderList} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeProvider>

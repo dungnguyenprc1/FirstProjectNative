@@ -21,22 +21,91 @@ export const food = {
       id: 1,
       content: 'Content of Noodle',
       data: [{id: 1, name: 'Nguyen Van A', comment: 'Bad ', rate: 1}],
-      child: [{id:1, content:'Another Comment', data:[{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}]}]
+      child: [
+        {
+          id: 1,
+          content: 'Another Comment 1',
+          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+          child: [
+            {
+              id: 1,
+              content: 'Another Comment 2 ',
+              data: [{id: 1, name: 'Nguyen Van C', comment: 'Normal', rate: 9}],
+            },
+          ],
+        },
+        {
+          id: 2,
+          content: 'ABC Comment 3 ',
+          data: [{id: 1, name: 'Nguyen Van D', comment: 'Normal', rate: 5}],
+          child: [
+            {
+              id: 1,
+              content: 'Another Comment 4',
+              data: [{id: 1, name: 'Nguyen Van E', comment: 'Normal', rate: 10}],
+            },
+          ],
+        },
+      ],
     },
   ],
-   banhmi: [
+  banhmi: [
     {
       id: 1,
       content: 'Content of Banh My',
       data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
-      child: [{id:1, content:'Another Comment', data:[{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}]}]
+      child: [
+        {
+          id: 1,
+          content: 'Another Comment',
+          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+        },
+      ],
+    },
+  ],
+  tom: [
+    {
+      id: 1,
+      content: 'Content of Banh My',
+      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
+      child: [
+        {
+          id: 1,
+          content: 'Another Comment',
+          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+        },
+      ],
+    },
+  ],
+  ca: [
+    {
+      id: 1,
+      content: 'Content of Banh My',
+      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
+      child: [
+        {
+          id: 1,
+          content: 'Another Comment',
+          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+        },
+      ],
+    },
+  ],
+  kinh: [
+    {
+      id: 1,
+      content: 'Content of Banh My',
+      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
+      child: [
+        {
+          id: 1,
+          content: 'Another Comment',
+          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+        },
+      ],
     },
   ],
 };
-
-
-
-
 
 export const DATA = {
   id: 1,

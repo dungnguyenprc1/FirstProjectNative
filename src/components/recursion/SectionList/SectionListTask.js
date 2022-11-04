@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, SectionList} from 'react-native';
+import {RootTrees} from '../../HOC/RootTrees';
+
 import {ItemType, DATA} from '../type';
 
 function Recursion({child}) {
@@ -16,7 +18,7 @@ function Recursion({child}) {
         <Text>{item.comment}</Text>
         <Text>{`rate ${item.rate}`}</Text>
 
-        {console.log('item.section.child', section)}
+        {/* {console.log('item.section.child', section)} */}
         {section.child ? (
           <SectionList sections={section.child} renderItem={render} />
         ) : null}
@@ -40,7 +42,8 @@ function Recursion({child}) {
   );
 }
 
-const SectionListTask = () => {
+const SectionListTask = ({root}) => {
+  console.log('root', root);
   return (
     <SafeAreaView>
       <View>
@@ -50,7 +53,8 @@ const SectionListTask = () => {
   );
 };
 
-export default SectionListTask;
+export default RootTrees(SectionListTask);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

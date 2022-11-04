@@ -28,14 +28,14 @@ function Recursion({child}:ItemType) {
   return (
     <SafeAreaView>
       <View>
-        <SectionList
-          // sections={child || []}
+        {/* <SectionList
+          sections={child || []}
           // keyExtractor={(item, index) => item + index}
           renderItem={render}
           renderSectionHeader={({section: {title}}) => (
             <Text style={styles.header}>{title}</Text>
           )}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );

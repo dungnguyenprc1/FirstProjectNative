@@ -1,48 +1,30 @@
 import React from 'react';
 import {FlatList, View, Text, SafeAreaView} from 'react-native';
-import {DATA} from '../type';
+import Card from '../ScrollView/Card';
+import {food} from '../type';
 
-const Recursion = ({title, child, content}) => {
+export const FlatRenderList = () => {
   const render = ({item}) => {
+    const {content, data} = item;
+
+    console.log('flatlisttt', item);
     return (
       <View>
-        <Text style={{left: 15}}>{item?.title}</Text>
-        {item.child ? (
-          <FlatList
-            data={item.child}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => {
-              return (
-                <View style={{left: 15}}>
-                  <Recursion {...item} />
-                </View>
-              );
-            }}
-          />
-        ) : null}
+        <Text>{content}</Text>
+        <Text>{item.name}</Text>
+        <FlatList data={data} renderItem={render} />
       </View>
     );
   };
   return (
-    <View style={{left: 15}}>
-      {/* <Text>{title}</Text>
-      <Text>{content}</Text> */}
-      <FlatList
-        data={child}
-        renderItem={render}
-        keyExtractor={item => item.id}
-      />
+    <View>
+      {Object.keys(food).map((root, i) => {
+        return (
+          <View key={i}>
+            <FlatList data={food[root]} renderItem={render} horizontal={true} />
+          </View>
+        );
+      })}
     </View>
   );
 };
-
-const FlatRenderList = () => {
-  return (
-    <SafeAreaView>
-      <View>
-        <Recursion {...DATA} />
-      </View>
-    </SafeAreaView>
-  );
-};
-export default FlatRenderList;
