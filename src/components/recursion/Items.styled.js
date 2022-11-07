@@ -4,3 +4,6 @@ export const ViewCover = styled.View`
   padding-left: 15px;
   /* border-left: solid 1px red; */
 `;
+export const Container = styled.View`
+  flex: 1;
+`;

@@ -4,12 +4,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import InformationStack from './src/navigation/InformationStack';
 import {
-  Card,
-  FlatListItem,
+  FlatRenderList,
   ScrollViewTask,
   SectionListTask,
+  // FlatRenderList,
 } from './src/components/recursion';
-import {FlatRenderList} from './src/components/recursion/FlatList/FlatRenderList';
+// import {FlatRenderList} from './src/components/recursion/FlatList/FlatRenderList';
 
 const theme = {
   colors: {
@@ -29,10 +29,9 @@ const YourApp = () => {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={InformationStack} />
-          <Tab.Screen name="FlatList" component={FlatListItem} />
           <Tab.Screen name="ScrollView" component={ScrollViewTask} />
           <Tab.Screen name="SectionList" component={SectionListTask} />
-          <Tab.Screen name="123" component={FlatRenderList} />
+          <Tab.Screen name="FlatList" component={FlatRenderList} />
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeProvider>

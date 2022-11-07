@@ -13,14 +13,13 @@ export type ItemType = {
   child?: ItemType[];
 };
 
-function generateList() {}
-
 export const food = {
   noodle: [
     {
       id: 1,
+      title: 'noodle',
       content: 'Content of Noodle',
-      data: [{id: 1, name: 'Nguyen Van A', comment: 'Bad ', rate: 1}],
+      data: [{id: 999, name: 'Nguyen Van A', comment: 'Bad ', rate: 1}],
       child: [
         {
           id: 1,
@@ -30,7 +29,7 @@ export const food = {
             {
               id: 1,
               content: 'Another Comment 2 ',
-              data: [{id: 1, name: 'Nguyen Van C', comment: 'Normal', rate: 9}],
+              data: [{id: 3, name: 'Nguyen Van C', comment: 'Normal', rate: 9}],
             },
           ],
         },
@@ -42,7 +41,9 @@ export const food = {
             {
               id: 1,
               content: 'Another Comment 4',
-              data: [{id: 1, name: 'Nguyen Van E', comment: 'Normal', rate: 10}],
+              data: [
+                {id: 1, name: 'Nguyen Van E', comment: 'Normal', rate: 10},
+              ],
             },
           ],
         },
@@ -51,56 +52,31 @@ export const food = {
   ],
   banhmi: [
     {
-      id: 1,
+      id: 2,
+      title: 'banhmi',
       content: 'Content of Banh My',
       data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
       child: [
         {
-          id: 1,
+          id: 10,
           content: 'Another Comment',
-          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+          data: [{id: 11, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
         },
       ],
     },
   ],
-  tom: [
+
+  hutieu: [
     {
-      id: 1,
-      content: 'Content of Banh My',
-      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
+      id: 4,
+      title: 'hutieu',
+      content: 'Content of Banh Trai',
+      data: [{id: 2, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
       child: [
         {
           id: 1,
           content: 'Another Comment',
-          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
-        },
-      ],
-    },
-  ],
-  ca: [
-    {
-      id: 1,
-      content: 'Content of Banh My',
-      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
-      child: [
-        {
-          id: 1,
-          content: 'Another Comment',
-          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
-        },
-      ],
-    },
-  ],
-  kinh: [
-    {
-      id: 1,
-      content: 'Content of Banh My',
-      data: [{id: 1, name: 'Nguyen Van A', comment: 'Good ', rate: 10}],
-      child: [
-        {
-          id: 1,
-          content: 'Another Comment',
-          data: [{id: 1, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
+          data: [{id: 3, name: 'Nguyen Van B', comment: 'Normal', rate: 5}],
         },
       ],
     },

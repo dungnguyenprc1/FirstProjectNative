@@ -1,30 +1,32 @@
 import React from 'react';
-import {FlatList, View, Text, SafeAreaView} from 'react-native';
-import Card from '../ScrollView/Card';
+import {FlatList, View} from 'react-native';
+import Card from '../Card/Card';
+import {Container} from '../Items.styled';
 import {food} from '../type';
 
-export const FlatRenderList = () => {
-  const render = ({item}) => {
-    const {content, data} = item;
-
-    console.log('flatlisttt', item);
+const FlatRenderList = () => {
+  const newArray = [].concat.apply(
+    [],
+    Object.keys(food).map((item, _) => food[item]),
+  );
+  const render = ({item}, key) => {
     return (
-      <View>
-        <Text>{content}</Text>
-        <Text>{item.name}</Text>
-        <FlatList data={data} renderItem={render} />
+      <View key={key}>
+        <Card values={item} root={item.title} />
       </View>
     );
   };
+
   return (
-    <View>
-      {Object.keys(food).map((root, i) => {
-        return (
-          <View key={i}>
-            <FlatList data={food[root]} renderItem={render} horizontal={true} />
-          </View>
-        );
-      })}
-    </View>
+    <Container>
+      <FlatList
+        data={newArray}
+        renderItem={render}
+        horizontal={true}
+        keyExtractor={item => item.id}
+        showsHorizontalScrollIndicator={false}
+      />
+    </Container>
   );
 };
+export default FlatRenderList;
