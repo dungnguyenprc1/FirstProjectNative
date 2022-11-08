@@ -4,6 +4,8 @@ export const Container = styled.View`
   border-width: 1px;
   margin-right: 40px;
   margin-bottom: 10px;
+
+  /* border-width */
 `;
 
 export const ViewHeader = styled.View`

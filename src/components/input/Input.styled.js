@@ -29,28 +29,30 @@ const OuterRadio = styled.TouchableOpacity`
   height: 14px;
   border-width: 1px;
   border-radius: 10px;
-  background-color: #fff;
+  /* background-color: #f4a31e; */
+  background-color: ${props => (props.active ? '#f4a31e' : '#fff')};
 
   justify-content: center;
   align-items: center;
-  margin-right: 6px;
 `;
 const InnerRadio = styled.View`
   width: 7px;
   height: 7px;
-
   border-width: 1px;
   border-radius: 3px;
-  background-color: #f4a31e;
+  background-color: ${props => (props.active ? '#fff' : null)}; ;
 `;
 const RowText = styled.View`
   flex-direction: row;
   align-items: center;
   margin-right: 44px;
-  /* gap: 10px; */ ;
+`;
+const TextGentle = styled.Text`
+  padding-left: 6px;
 `;
 
 export {
+  TextGentle,
   NormalInput,
   Layout,
   TextError,

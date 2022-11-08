@@ -7,9 +7,7 @@ import {
   FlatRenderList,
   ScrollViewTask,
   SectionListTask,
-  // FlatRenderList,
 } from './src/components/recursion';
-// import {FlatRenderList} from './src/components/recursion/FlatList/FlatRenderList';
 
 const theme = {
   colors: {
@@ -24,7 +22,6 @@ const Tab = createBottomTabNavigator();
 
 const YourApp = () => {
   return (
-    // <InforCustomerScreen />
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Tab.Navigator>
