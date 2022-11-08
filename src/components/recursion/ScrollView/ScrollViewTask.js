@@ -12,9 +12,9 @@ function ScrollViewTask() {
           {Object.keys(food).map((root, i) => {
             return (
               <View key={i}>
-                {food[root].map((item, i) => {
+                {food[root].map((item, index) => {
                   return (
-                    <View key={i}>
+                    <View key={index}>
                       <Card root={root} values={item} />
                     </View>
                   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import {SectionList, View} from 'react-native';
 import Card from '../Card/Card';
+import {Container} from '../Items.styled';
 
 import {food} from '../type';
 
@@ -11,7 +12,6 @@ function SectionListTask() {
   );
   const render = item => {
     const {section} = item;
-    console.log('sectionList', item);
     return (
       <View>
         <Card values={section} root={section.title} />
@@ -19,14 +19,14 @@ function SectionListTask() {
     );
   };
   return (
-    <View style={{flex: 1}}>
+    <Container>
       <SectionList
         sections={newArray}
         renderItem={render}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
-    </View>
+    </Container>
   );
 }
 

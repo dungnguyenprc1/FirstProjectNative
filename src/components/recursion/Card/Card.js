@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {Container, TabIndent, ViewHeader, BottomSpace} from './Card.styled';
+import {
+  Container,
+  TabIndent,
+  ViewHeader,
+  BottomSpace,
+  ShowMore,
+} from './Card.styled';
+import {ShowContent} from '../../HOC/ShowContent';
 
-export default function Card({root, values}) {
+function Card({root, values}) {
   const {child, content, data, title} = values;
+  const [show, setShow] = useState(false);
   return (
     <Container>
       <View>
@@ -21,18 +29,20 @@ export default function Card({root, values}) {
                   <Text>Reporter: {item?.name}</Text>
                   <Text>Comment: {item?.comment}</Text>
                   <BottomSpace>Rate: {item?.rate}</BottomSpace>
-                  <TouchableOpacity onPress={() => alert('123')}>
-                    {child &&
-                      child.map((itemChild, index) => {
-                        return (
-                          <Card
-                            values={itemChild}
-                            key={index}
-                            root={item.title}
-                          />
-                        );
-                      })}
+                  <TouchableOpacity onPress={() => setShow(!show)}>
+                    {child && (
+                      <ShowMore>{show ? 'Unless' : 'Show More'}</ShowMore>
+                    )}
                   </TouchableOpacity>
+
+                  {show &&
+                    child?.map((itemChild, index) => {
+                      return (
+                        <View key={index}>
+                          {<Card values={itemChild} root={item.title} />}
+                        </View>
+                      );
+                    })}
                 </View>
               );
             })}
@@ -42,3 +52,4 @@ export default function Card({root, values}) {
     </Container>
   );
 }
+export default ShowContent(Card);
